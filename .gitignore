@@ -9,6 +9,7 @@ apps/storybook/node_modules
 .turbo/cookies
 .turbo/daemon
 /packages/ui/.turbo/*.log
+/packages/ui/node_modules
 /apps/storybook/.turbo/*.log
 /apps/storybook/*.log
 
