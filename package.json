@@ -1,36 +1,36 @@
 {
-  "name": "refloui",
-  "private": true,
-  "packageManager": "npm@11.6.2",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
-  "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "lint": "turbo lint",
-    "test": "turbo test",
-    "clean": "turbo clean",
-    "storybook": "npm run dev --workspace @refloui/storybook-app",
-    "changeset": "changeset",
-    "update:deps": "node scripts/update-deps.mjs"
-  },
-  "engines": {
-    "node": ">=20.16.0"
-  },
-  "devDependencies": {
-    "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-storybook": "10.0.8",
-    "jsdom": "^27.2.0",
-    "npm-check-updates": "^19.1.2",
-    "prettier": "^3.6.2",
-    "turbo": "^2.6.1",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.47.0"
-  },
-  "version": "0.0.1-dev.0"
+	"name": "refloui",
+	"private": true,
+	"packageManager": "npm@11.6.2",
+	"workspaces": [
+		"packages/*",
+		"apps/*"
+	],
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"lint": "turbo lint",
+		"test": "turbo test",
+		"clean": "turbo clean",
+		"storybook": "npm run dev --workspace @refloui/storybook-app",
+		"changeset": "changeset"
+	},
+	"engines": {
+		"node": ">=20.16.0"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"eslint": "^9.39.1",
+		"eslint-plugin-react": "^7.37.5",
+		"eslint-plugin-react-hooks": "^7.0.1",
+		"eslint-plugin-storybook": "10.0.8",
+		"jsdom": "^27.2.0",
+		"npm-check-updates": "^19.1.2",
+		"prettier": "^3.6.2",
+		"turbo": "^2.6.1",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.47.0"
+	},
+	"version": "0.0.1-dev.0"
 }
+
