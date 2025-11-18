@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 apps/storybook/node_modules
+.turbo/cache
+.turbo/cookies
+.turbo/daemon
+/packages/ui/.turbo/*.log
+/apps/storybook/.turbo/*.log
+/apps/storybook/*.log
 
 # testing
 /coverage
@@ -16,6 +22,7 @@ apps/storybook/node_modules
 
 # production
 /build
+/packages/ui/dist
 
 # misc
 .DS_Store

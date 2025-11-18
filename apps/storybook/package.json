@@ -1,5 +1,5 @@
 {
-	"name": "storybook",
+	"name": "@refloui/storybook-app",
 	"private": true,
 	"scripts": {
 		"dev": "storybook dev -p 6006",
@@ -7,18 +7,14 @@
 		"lint": "eslint . --ext .ts,.tsx"
 	},
 	"devDependencies": {
-		"@storybook/addon-a11y": "^8.5.0",
-		"@storybook/addon-docs": "^8.5.0",
-		"@storybook/addon-essentials": "^8.5.0",
-		"@storybook/addon-links": "^8.5.0",
-		"@storybook/cli": "^8.5.0",
-		"@storybook/manager-api": "^8.5.0",
-		"@storybook/preview-api": "^8.5.0",
-		"@storybook/react": "^8.5.0",
-		"@storybook/react-vite": "^8.5.0",
-		"@storybook/theming": "^8.5.0",
-		"storybook": "^8.5.0",
-		"storybook-dark-mode": "^4.0.2",
-		"vite": "^6.4.1"
+		"@storybook/addon-a11y": "^10.0.8",
+		"@storybook/addon-docs": "^10.0.8",
+		"@storybook/addon-links": "^10.0.8",
+		"@storybook/cli": "^10.0.8",
+		"@storybook/react-vite": "^10.0.8",
+		"@vitejs/plugin-react": "^5.1.1",
+		"eslint-plugin-storybook": "10.0.8",
+		"storybook": "^10.0.8",
+		"vite": "^7.2.2"
 	}
 }

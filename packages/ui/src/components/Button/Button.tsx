@@ -1,19 +1,19 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
-import { ButtonProps } from "./Button.types";
-import "../styles/tokens.css";
+import { ButtonProps, ButtonVariant, ButtonSize } from "./Button.types";
+import "../../styles/tokens.css";
+import "./Button.css";
 
-const variantClasses: Record<ButtonProps["variant"], string> = {
-	solid: "bg-[var(--rf-color-primary)] text-[var(--rf-color-primary-foreground)] border-transparent",
-	outline:
-		"border border-[var(--rf-color-primary)] text-[var(--rf-color-primary)] bg-transparent",
-	ghost: "bg-transparent text-[var(--rf-color-primary)] border-transparent hover:bg-[color-mix(in srgb,var(--rf-color-primary) 10%,transparent)]",
+const variantClasses: Record<ButtonVariant, string> = {
+	solid: "rf-btn--solid",
+	outline: "rf-btn--outline",
+	ghost: "rf-btn--ghost",
 };
 
-const sizeClasses: Record<ButtonProps["size"], string> = {
-	sm: "text-sm px-3 py-1.5",
-	md: "text-base px-4 py-2",
-	lg: "text-lg px-5 py-2.5",
+const sizeClasses: Record<ButtonSize, string> = {
+	sm: "rf-btn--sm",
+	md: "rf-btn--md",
+	lg: "rf-btn--lg",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -33,11 +33,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		<button
 			ref={ref}
 			className={clsx(
-				"inline-flex items-center justify-center rounded-[var(--rf-radius-md)] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--rf-color-primary)]",
+				"rf-btn",
 				variantClasses[variant],
 				sizeClasses[size],
-				fullWidth && "w-full",
-				(disabled || loading) && "opacity-60 cursor-not-allowed",
+				fullWidth && "rf-btn--full",
+				(disabled || loading) && "rf-btn--disabled",
 				className,
 			)}
 			disabled={disabled || loading}

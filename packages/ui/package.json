@@ -2,11 +2,12 @@
 	"name": "@refloui/ui",
 	"version": "0.0.0",
 	"description": "RefloUI component library for React/Next.js",
-	"main": "./dist/index.cjs",
+	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"sideEffects": [
-		"./dist/styles/**"
+		"./dist/styles/**",
+		"./dist/**/*.css"
 	],
 	"files": [
 		"dist"
@@ -15,18 +16,20 @@
 		"build": "tsup",
 		"dev": "tsup --watch",
 		"lint": "eslint src --ext .ts,.tsx",
-		"test": "vitest run",
-		"test:watch": "vitest"
+		"test": "vitest --config tests/vitest.config.ts",
+		"test:watch": "vitest --config tests/vitest.config.ts"
 	},
 	"peerDependencies": {
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react": "^18.2.0 || ^19.0.0",
+		"react-dom": "^18.2.0 || ^19.0.0"
+	},
+	"dependencies": {
+		"clsx": "^2.1.1"
 	},
 	"devDependencies": {
 		"@testing-library/react": "^16.3.0",
-		"@types/react": "^19.2.5",
+		"@types/react": "^19.2.6",
 		"@types/react-dom": "^19.2.3",
-		"clsx": "^2.1.1",
 		"eslint": "^9.39.1",
 		"tsup": "^8.5.1",
 		"typescript": "^5.9.3",
