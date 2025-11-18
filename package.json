@@ -31,5 +31,6 @@
     "turbo": "^2.6.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.47.0"
-  }
+  },
+  "version": "0.0.1-dev.0"
 }
