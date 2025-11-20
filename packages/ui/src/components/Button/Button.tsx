@@ -1,8 +1,19 @@
 import { forwardRef } from "react";
 import clsx from "clsx";
-import { ButtonProps, ButtonVariant, ButtonSize } from "./Button.types";
+import {
+	ButtonProps,
+	ButtonVariant,
+	ButtonSize,
+	ButtonColor,
+} from "./Button.types";
 import "../../styles/tokens.css";
 import "./Button.css";
+
+const colorClasses: Record<ButtonColor, string> = {
+	primary: "rf-btn--primary",
+	secondary: "rf-btn--secondary",
+	tertiary: "rf-btn--tertiary",
+};
 
 const variantClasses: Record<ButtonVariant, string> = {
 	solid: "rf-btn--solid",
@@ -20,12 +31,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	(
 		{
 			className,
+			color = "primary",
 			variant = "solid",
 			size = "md",
 			fullWidth,
-			loading,
+			isLoading,
+			isDisabled,
 			children,
-			disabled,
 			...rest
 		},
 		ref,
@@ -34,16 +46,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			ref={ref}
 			className={clsx(
 				"rf-btn",
+				colorClasses[color],
 				variantClasses[variant],
 				sizeClasses[size],
 				fullWidth && "rf-btn--full",
-				(disabled || loading) && "rf-btn--disabled",
+
 				className,
 			)}
-			disabled={disabled || loading}
+			disabled={isDisabled || isLoading}
 			{...rest}
 		>
-			{loading ? "Loading..." : children}
+			{children}
 		</button>
 	),
 );
