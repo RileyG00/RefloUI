@@ -37,4 +37,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	fullWidth?: boolean;
 	isLoading?: boolean;
 	isDisabled?: boolean;
+	isDisableRipple?: boolean;
 }

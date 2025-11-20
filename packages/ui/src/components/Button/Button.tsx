@@ -1,4 +1,11 @@
-import { forwardRef } from "react";
+import {
+	forwardRef,
+	useEffect,
+	useRef,
+	useState,
+	type CSSProperties,
+	type MouseEvent,
+} from "react";
 import { tv } from "tailwind-variants";
 import {
 	ButtonProps,
@@ -6,7 +13,15 @@ import {
 	ButtonSize,
 	ButtonColor,
 } from "./Button.types";
+import "./Button.css";
 import "../../styles/tokens.css";
+
+type Ripple = {
+	id: number;
+	style: CSSProperties;
+};
+
+const RIPPLE_DURATION = 650;
 
 const buttonStyles = tv({
 	base: [
@@ -17,6 +32,7 @@ const buttonStyles = tv({
 		"focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1",
 		"disabled:opacity-60 disabled:cursor-not-allowed",
 		"hover:cursor-pointer",
+		"relative overflow-hidden",
 	].join(" "),
 	variants: {
 		color: {
@@ -153,30 +169,97 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			fullWidth = false,
 			isLoading = false,
 			isDisabled = false,
+			isDisableRipple = false,
 			children,
+			onClick,
 			...rest
 		},
 		ref,
-	) => (
-		<button
-			ref={ref}
-			data-loading={isLoading}
-			data-disabled={isDisabled}
-			className={buttonStyles({
-				color,
-				variant,
-				size,
-				radius,
-				fullWidth,
-				class: className,
-			})}
-			disabled={isDisabled || isLoading}
-			{...rest}
-		>
-			{children}
-		</button>
-	),
+	) => {
+		const [ripples, setRipples] = useState<Ripple[]>([]);
+		const nextRippleId = useRef(0);
+		const rippleTimers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+
+		useEffect(
+			() => () => {
+				rippleTimers.current.forEach((timerId) => clearTimeout(timerId));
+				rippleTimers.current = [];
+			},
+			[],
+		);
+
+		const addRipple = (event: MouseEvent<HTMLButtonElement>) => {
+			const rect = event.currentTarget.getBoundingClientRect();
+			const hasPointer = event.clientX !== 0 || event.clientY !== 0;
+			const x = hasPointer ? event.clientX - rect.left : rect.width / 2;
+			const y = hasPointer ? event.clientY - rect.top : rect.height / 2;
+			const farthestX = Math.max(x, rect.width - x);
+			const farthestY = Math.max(y, rect.height - y);
+			const radius = Math.sqrt(farthestX ** 2 + farthestY ** 2);
+			const diameter = radius * 2;
+			const id = nextRippleId.current++;
+
+			const style: CSSProperties = {
+				width: diameter,
+				height: diameter,
+				left: x - radius,
+				top: y - radius,
+			};
+
+			setRipples((prev) => [...prev, { id, style }]);
+			const timeoutId = setTimeout(() => {
+				setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
+				rippleTimers.current = rippleTimers.current.filter(
+					(timerId) => timerId !== timeoutId,
+				);
+			}, RIPPLE_DURATION);
+
+			rippleTimers.current.push(timeoutId);
+		};
+
+		const handleClick: ButtonProps["onClick"] = (event) => {
+			onClick?.(event);
+			if (
+				event.defaultPrevented ||
+				isDisabled ||
+				isLoading ||
+				isDisableRipple
+			) {
+				return;
+			}
+
+			addRipple(event);
+		};
+
+		return (
+			<button
+				ref={ref}
+				data-loading={isLoading}
+				data-disabled={isDisabled}
+				className={buttonStyles({
+					color,
+					variant,
+					size,
+					radius,
+					fullWidth,
+					class: className,
+				})}
+				disabled={isDisabled || isLoading}
+				onClick={handleClick}
+				{...rest}
+			>
+				{ripples.map((ripple) => (
+					<span
+						key={ripple.id}
+						className="rfui-ripple"
+						style={ripple.style}
+						aria-hidden="true"
+					/>
+				))}
+				{children}
+			</button>
+		);
+	},
 );
 
 Button.displayName = "Button";
-

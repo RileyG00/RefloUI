@@ -1,0 +1,16 @@
+.rfui-ripple {
+	position: absolute;
+	border-radius: 9999px;
+	pointer-events: none;
+	background-color: currentColor;
+	opacity: 0.25;
+	transform: scale(0);
+	animation: rfui-ripple 650ms ease-out forwards;
+}
+
+@keyframes rfui-ripple {
+	to {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
