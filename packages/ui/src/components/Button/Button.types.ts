@@ -1,10 +1,14 @@
 import { ButtonHTMLAttributes } from "react";
 
-export type ButtonColor = "primary" | "secondary" | "tertiary" | "default";
-// | "success"
-// | "warning"
-// | "danger"
-// | "info";
+export type ButtonColor =
+	| "primary"
+	| "secondary"
+	| "tertiary"
+	| "default"
+	| "success"
+	| "info"
+	| "warning"
+	| "danger";
 export type ButtonVariant = "solid" | "outline" | "ghost" | "flat";
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonRadius =

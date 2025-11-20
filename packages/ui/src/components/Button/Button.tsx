@@ -20,21 +20,69 @@ const buttonStyles = tv({
 	].join(" "),
 	variants: {
 		color: {
-			primary:
-				"[--btn-color:var(--color-primary)] [--btn-foreground:var(--color-primary-foreground)] focus-visible:outline-[var(--color-primary)]",
-			secondary:
-				"[--btn-color:var(--color-secondary)] [--btn-foreground:var(--color-secondary-foreground)] focus-visible:outline-[var(--color-secondary)]",
-			tertiary:
-				"[--btn-color:var(--color-tertiary)] [--btn-foreground:var(--color-tertiary-foreground)] focus-visible:outline-[var(--color-tertiary)]",
-			default:
-				"[--btn-color:var(--color-default)] [--btn-foreground:var(--color-default-foreground)] focus-visible:outline-[var(--color-default)]",
+			primary: [
+				"[--btn-surface:var(--color-primary-surface)]",
+				"[--btn-on-surface:var(--color-primary-foreground)]",
+				"[--btn-on-light:var(--color-primary-on-light)]",
+				"[--btn-tint:var(--color-primary-tint)]",
+				"focus-visible:outline-[var(--color-primary-on-light)]",
+			].join(" "),
+			secondary: [
+				"[--btn-surface:var(--color-secondary-surface)]",
+				"[--btn-on-surface:var(--color-secondary-foreground)]",
+				"[--btn-on-light:var(--color-secondary-on-light)]",
+				"[--btn-tint:var(--color-secondary-tint)]",
+				"focus-visible:outline-[var(--color-secondary-on-light)]",
+			].join(" "),
+			tertiary: [
+				"[--btn-surface:var(--color-tertiary-surface)]",
+				"[--btn-on-surface:var(--color-tertiary-foreground)]",
+				"[--btn-on-light:var(--color-tertiary-on-light)]",
+				"[--btn-tint:var(--color-tertiary-tint)]",
+				"focus-visible:outline-[var(--color-tertiary-on-light)]",
+			].join(" "),
+			default: [
+				"[--btn-surface:var(--color-default-surface)]",
+				"[--btn-on-surface:var(--color-default-foreground)]",
+				"[--btn-on-light:var(--color-default-on-light)]",
+				"[--btn-tint:var(--color-default-tint)]",
+				"focus-visible:outline-[var(--color-default-on-light)]",
+			].join(" "),
+			success: [
+				"[--btn-surface:var(--color-success-surface)]",
+				"[--btn-on-surface:var(--color-success-foreground)]",
+				"[--btn-on-light:var(--color-success-on-light)]",
+				"[--btn-tint:var(--color-success-tint)]",
+				"focus-visible:outline-[var(--color-success-on-light)]",
+			].join(" "),
+			info: [
+				"[--btn-surface:var(--color-info-surface)]",
+				"[--btn-on-surface:var(--color-info-foreground)]",
+				"[--btn-on-light:var(--color-info-on-light)]",
+				"[--btn-tint:var(--color-info-tint)]",
+				"focus-visible:outline-[var(--color-info-on-light)]",
+			].join(" "),
+			warning: [
+				"[--btn-surface:var(--color-warning-surface)]",
+				"[--btn-on-surface:var(--color-warning-foreground)]",
+				"[--btn-on-light:var(--color-warning-on-light)]",
+				"[--btn-tint:var(--color-warning-tint)]",
+				"focus-visible:outline-[var(--color-warning-on-light)]",
+			].join(" "),
+			danger: [
+				"[--btn-surface:var(--color-danger-surface)]",
+				"[--btn-on-surface:var(--color-danger-foreground)]",
+				"[--btn-on-light:var(--color-danger-on-light)]",
+				"[--btn-tint:var(--color-danger-tint)]",
+				"focus-visible:outline-[var(--color-danger-on-light)]",
+			].join(" "),
 		} satisfies Record<ButtonColor, string>,
 		variant: {
-			solid: "border-transparent bg-[var(--btn-color)] text-[var(--btn-foreground)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-color)_80%,transparent)]",
+			solid: "border-transparent bg-[var(--btn-surface)] text-[var(--btn-on-surface)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-surface)_85%,transparent)]",
 			outline:
-				"bg-transparent text-[var(--btn-color)] border-[var(--btn-color)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-color)_15%,transparent)]",
-			ghost: "bg-transparent border-transparent text-[var(--btn-color)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-color)_15%,transparent)]",
-			flat: "border-transparent text-[var(--btn-color)] bg-[color-mix(in_srgb,var(--btn-color)_20%,transparent)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-color)_10%,transparent)]",
+				"bg-transparent text-[var(--btn-on-light)] border-[var(--btn-on-light)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
+			ghost: "bg-transparent border-transparent text-[var(--btn-on-light)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
+			flat: "border-transparent text-[var(--btn-on-light)] bg-[color-mix(in_srgb,var(--btn-tint)_80%,transparent)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-tint)_65%,transparent)]",
 		} satisfies Record<ButtonVariant, string>,
 		size: {
 			sm: "text-sm py-[0.3rem] px-[0.75rem]",
@@ -57,13 +105,6 @@ const buttonStyles = tv({
 			full: "rounded-full",
 		},
 	},
-	compoundVariants: [
-		{
-			variant: "flat",
-			color: "default",
-			class: "text-[var(--color-default-950)] bg-[color-mix(in_srgb,var(--btn-color)_40%,transparent)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-color)_25%,transparent)]",
-		},
-	],
 	defaultVariants: {
 		color: "primary",
 		variant: "solid",
