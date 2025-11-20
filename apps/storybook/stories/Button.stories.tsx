@@ -13,3 +13,4 @@ type Story = StoryObj<typeof Button>;
 export const Solid: Story = {};
 export const Outline: Story = { args: { variant: "outline" } };
 export const Ghost: Story = { args: { variant: "ghost" } };
+export const Flat: Story = { args: { variant: "flat" } };

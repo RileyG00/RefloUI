@@ -12,6 +12,7 @@ apps/storybook/node_modules
 /packages/ui/node_modules
 /apps/storybook/.turbo/*.log
 /apps/storybook/*.log
+/apps/storybook/storybook-static
 
 # testing
 /coverage

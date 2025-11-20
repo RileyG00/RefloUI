@@ -1,18 +1,29 @@
 import { ButtonHTMLAttributes } from "react";
 
-export type ButtonColor = "primary" | "secondary" | "tertiary";
-// | "default"
+export type ButtonColor = "primary" | "secondary" | "tertiary" | "default";
 // | "success"
 // | "warning"
 // | "danger"
 // | "info";
-export type ButtonVariant = "solid" | "outline" | "ghost";
+export type ButtonVariant = "solid" | "outline" | "ghost" | "flat";
 export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonRadius =
+	| "none"
+	| "xs"
+	| "sm"
+	| "md"
+	| "lg"
+	| "xl"
+	| "2xl"
+	| "3xl"
+	| "4xl"
+	| "full";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: ButtonColor;
 	variant?: ButtonVariant;
 	size?: ButtonSize;
+	radius?: ButtonRadius;
 	fullWidth?: boolean;
 	isLoading?: boolean;
 	isDisabled?: boolean;
