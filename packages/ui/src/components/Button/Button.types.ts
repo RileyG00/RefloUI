@@ -13,6 +13,7 @@ export type ButtonVariant =
 	| "solid"
 	| "outline"
 	| "outlineFill"
+	| "outlineRemove"
 	| "ghost"
 	| "flat";
 export type ButtonSize = "sm" | "md" | "lg";

@@ -95,6 +95,11 @@ const buttonStyles = tv({
 				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_100%,transparent)]",
 				"enabled:hover:text-[var(--btn-on-surface)]",
 			].join(" "),
+			outlineRemove: [
+				"bg-transparent text-[var(--btn-on-light)]",
+				"enabled:hover:border-transparent",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
+			].join(" "),
 			ghost: [
 				"bg-transparent",
 				"border-transparent",

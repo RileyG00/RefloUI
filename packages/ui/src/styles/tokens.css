@@ -120,8 +120,8 @@
 	--color-success-900: hsl(150, 55%, 10%);
 	--color-success-950: hsl(150, 55%, 5%);
 	--color-success: var(--color-success-400);
-	--color-success-surface: var(--color-success-800);
-	--color-success-on-light: var(--color-success-800);
+	--color-success-surface: var(--color-success-700);
+	--color-success-on-light: var(--color-success-700);
 	--color-success-foreground: var(--color-text-50);
 	--color-success-tint: var(--color-success-100);
 
@@ -155,10 +155,10 @@
 	--color-warning-800: hsl(40, 85%, 22%);
 	--color-warning-900: hsl(40, 85%, 10%);
 	--color-warning-950: hsl(40, 85%, 5%);
-	--color-warning: var(--color-warning-400);
-	--color-warning-surface: var(--color-warning-700);
-	--color-warning-on-light: var(--color-warning-700);
-	--color-warning-foreground: var(--color-text-50);
+	--color-warning: var(--color-warning-500);
+	--color-warning-surface: var(--color-warning-500);
+	--color-warning-on-light: var(--color-warning-500);
+	--color-warning-foreground: var(--color-text-900);
 	--color-warning-tint: var(--color-warning-100);
 
 	/* Danger */
