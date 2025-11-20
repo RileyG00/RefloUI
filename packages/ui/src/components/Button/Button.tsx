@@ -78,11 +78,35 @@ const buttonStyles = tv({
 			].join(" "),
 		} satisfies Record<ButtonColor, string>,
 		variant: {
-			solid: "border-transparent bg-[var(--btn-surface)] text-[var(--btn-on-surface)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-surface)_85%,transparent)]",
-			outline:
-				"bg-transparent text-[var(--btn-on-light)] border-[var(--btn-on-light)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
-			ghost: "bg-transparent border-transparent text-[var(--btn-on-light)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
-			flat: "border-transparent text-[var(--btn-on-light)] bg-[color-mix(in_srgb,var(--btn-tint)_80%,transparent)] enabled:hover:bg-[color-mix(in_srgb,var(--btn-tint)_65%,transparent)]",
+			solid: [
+				"border-transparent",
+				"bg-[var(--btn-surface)]",
+				"text-[var(--btn-on-surface)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-surface)_85%,transparent)]",
+			].join(" "),
+			outline: [
+				"bg-transparent text-[var(--btn-on-light)]",
+				"border-[var(--btn-on-light)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
+			].join(" "),
+			outlineFill: [
+				"bg-transparent text-[var(--btn-on-light)]",
+				"border-[var(--btn-on-light)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_100%,transparent)]",
+				"enabled:hover:text-[var(--btn-on-surface)]",
+			].join(" "),
+			ghost: [
+				"bg-transparent",
+				"border-transparent",
+				"text-[var(--btn-on-light)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
+			].join(" "),
+			flat: [
+				"border-transparent",
+				"text-[var(--btn-on-light)]",
+				"bg-[color-mix(in_srgb,var(--btn-tint)_80%,transparent)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-tint)_65%,transparent)]",
+			].join(" "),
 		} satisfies Record<ButtonVariant, string>,
 		size: {
 			sm: "text-sm py-[0.3rem] px-[0.75rem]",

@@ -9,7 +9,12 @@ export type ButtonColor =
 	| "info"
 	| "warning"
 	| "danger";
-export type ButtonVariant = "solid" | "outline" | "ghost" | "flat";
+export type ButtonVariant =
+	| "solid"
+	| "outline"
+	| "outlineFill"
+	| "ghost"
+	| "flat";
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonRadius =
 	| "none"
