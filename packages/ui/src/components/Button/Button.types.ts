@@ -14,6 +14,7 @@ export type ButtonVariant =
 	| "outline"
 	| "outlineFill"
 	| "outlineRemove"
+	| "outlineRemain"
 	| "ghost"
 	| "flat"
 	| "shadow";

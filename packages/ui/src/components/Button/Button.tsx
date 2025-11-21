@@ -123,6 +123,10 @@ const buttonStyles = tv({
 				"enabled:hover:border-transparent",
 				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-on-light)_12%,transparent)]",
 			].join(" "),
+			outlineRemain: [
+				"text-[var(--btn-on-light)]",
+				"enabled:hover:text-[color-mix(in_srgb,var(--btn-on-light)_60%,transparent)]",
+			].join(" "),
 			ghost: [
 				"bg-transparent",
 				"border-transparent",

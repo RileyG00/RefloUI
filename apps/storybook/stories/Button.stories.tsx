@@ -19,6 +19,7 @@ export const Solid: Story = {};
 export const Outline: Story = { args: { variant: "outline" } };
 export const OutlineFill: Story = { args: { variant: "outlineFill" } };
 export const OutlineRemove: Story = { args: { variant: "outlineRemove" } };
+export const OutlineRemain: Story = { args: { variant: "outlineRemain" } };
 export const Ghost: Story = { args: { variant: "ghost" } };
 export const Flat: Story = { args: { variant: "flat" } };
 export const WithSlots: Story = {
@@ -42,3 +43,4 @@ export const WithSlots: Story = {
 	args: { children: "Button" },
 };
 export const Shadow: Story = { args: { variant: "shadow" } };
+
