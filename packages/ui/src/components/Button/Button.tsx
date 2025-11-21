@@ -146,16 +146,27 @@ const buttonStyles = tv({
 				"enabled:hover:text-[color-mix(in_srgb,var(--btn-bg)_60%,transparent)]",
 			].join(" "),
 			ghost: [
-				"bg-transparent",
 				"border-transparent",
 				"text-[var(--btn-bg)]",
 				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_20%,transparent)]",
+			].join(" "),
+			ghostOutline: [
+				"border-transparent",
+				"text-[var(--btn-bg)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_20%,transparent)]",
+				"enabled:hover:border-[var(--btn-bg)]",
 			].join(" "),
 			flat: [
 				"border-transparent",
 				"text-[var(--btn-bg-flat-txt)]",
 				"bg-[var(--btn-bg-flat)]",
 				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg-flat)_65%,transparent)]",
+			].join(" "),
+			none: [
+				"border-transparent",
+
+				"text-[var(--btn-bg)]",
+				"enabled:hover:text-[color-mix(in_srgb,var(--btn-bg)_60%,transparent)]",
 			].join(" "),
 			shadow: [
 				"border-transparent",
