@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import {
 	forwardRef,
 	useEffect,
@@ -25,14 +26,20 @@ const RIPPLE_DURATION = 650;
 
 const buttonStyles = tv({
 	base: [
+		"rfui-button",
 		"inline-flex items-center justify-center",
 		"font-medium font-[var(--font-family)]",
-		"border transition-colors duration-[var(--transition-duration)] var(--transition-style)",
+		"border",
+		"transition-[background-color,color,border-color]",
+		"duration-[var(--transition-duration)]",
+		"ease-[var(--transition-style)]",
 		"min-w-fit",
 		"focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1",
 		"disabled:opacity-60 disabled:cursor-not-allowed",
 		"hover:cursor-pointer",
 		"relative overflow-hidden",
+		"transition-transform",
+		"enabled:active:scale-97",
 	].join(" "),
 	variants: {
 		color: {
@@ -178,11 +185,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	) => {
 		const [ripples, setRipples] = useState<Ripple[]>([]);
 		const nextRippleId = useRef(0);
-		const rippleTimers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+		const rippleTimers = useRef<
+			Array<ReturnType<typeof globalThis.setTimeout>>
+		>([]);
 
 		useEffect(
 			() => () => {
-				rippleTimers.current.forEach((timerId) => clearTimeout(timerId));
+				rippleTimers.current.forEach((timerId) =>
+					globalThis.clearTimeout(timerId),
+				);
 				rippleTimers.current = [];
 			},
 			[],
@@ -207,7 +218,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			};
 
 			setRipples((prev) => [...prev, { id, style }]);
-			const timeoutId = setTimeout(() => {
+			const timeoutId = globalThis.setTimeout(() => {
 				setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
 				rippleTimers.current = rippleTimers.current.filter(
 					(timerId) => timerId !== timeoutId,
@@ -263,3 +274,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+
