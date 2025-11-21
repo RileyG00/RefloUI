@@ -7,7 +7,11 @@ import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 
 export default tseslint.config({
-    ignores: ["**/node_modules", "**/dist", "storybook-static"],
+    ignores: [
+        "**/node_modules",
+        "**/dist",
+        "**/storybook-static/**",
+    ],
 }, js.configs.recommended, {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
