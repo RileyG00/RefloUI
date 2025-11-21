@@ -135,6 +135,15 @@ const buttonStyles = tv({
 				"bg-[color-mix(in_srgb,var(--btn-tint)_80%,transparent)]",
 				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-tint)_65%,transparent)]",
 			].join(" "),
+			shadow: [
+				"border-transparent",
+				"bg-[var(--btn-surface)]",
+				"text-[var(--btn-on-surface)]",
+				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-surface)_85%,transparent)]",
+				"shadow-lg",
+				"shadow-xl/30",
+				"filter-[drop-shadow(2px_4px_6px_color-mix(in_srgb,var(--btn-surface)_50%,transparent))]",
+			].join(" "),
 		} satisfies Record<ButtonVariant, string>,
 		size: {
 			sm: "text-sm py-[0.3rem] px-[0.75rem]",
@@ -276,7 +285,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				))}
 				<span className="rfui-button__content">
 					{hasStartContent ? (
-						<span className="rfui-button__start">{startContent}</span>
+						<span className="rfui-button__start">
+							{startContent}
+						</span>
 					) : null}
 					{hasChildren ? (
 						<span className="rfui-button__label">{children}</span>
@@ -291,3 +302,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+

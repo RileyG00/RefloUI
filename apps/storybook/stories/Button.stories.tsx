@@ -21,7 +21,6 @@ export const OutlineFill: Story = { args: { variant: "outlineFill" } };
 export const OutlineRemove: Story = { args: { variant: "outlineRemove" } };
 export const Ghost: Story = { args: { variant: "ghost" } };
 export const Flat: Story = { args: { variant: "flat" } };
-
 export const WithSlots: Story = {
 	render: (args) => (
 		<Button
@@ -42,4 +41,4 @@ export const WithSlots: Story = {
 	),
 	args: { children: "Button" },
 };
-
+export const Shadow: Story = { args: { variant: "shadow" } };

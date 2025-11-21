@@ -15,7 +15,8 @@ export type ButtonVariant =
 	| "outlineFill"
 	| "outlineRemove"
 	| "ghost"
-	| "flat";
+	| "flat"
+	| "shadow";
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonRadius =
 	| "none"
