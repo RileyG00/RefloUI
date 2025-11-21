@@ -135,9 +135,11 @@ const buttonStyles = tv({
 			].join(" "),
 			flat: [
 				"border-transparent",
-				"text-[var(--btn-on-light)]",
-				"bg-[color-mix(in_srgb,var(--btn-tint)_80%,transparent)]",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-tint)_65%,transparent)]",
+				"text-[var(--color-text)]",
+				"bg-[var(--btn-tint)]",
+				"supports-[background:color-mix(in_srgb,var(--btn-tint)_80%,transparent)]:bg-[color-mix(in_srgb,var(--btn-tint)_80%,transparent)]",
+				"enabled:hover:bg-[var(--btn-tint)]",
+				"enabled:hover:supports-[background:color-mix(in_srgb,var(--btn-tint)_65%,transparent)]:bg-[color-mix(in_srgb,var(--btn-tint)_65%,transparent)]",
 			].join(" "),
 			shadow: [
 				"border-transparent",
