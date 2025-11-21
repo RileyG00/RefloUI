@@ -1,4 +1,6 @@
-:root {
+:root,
+:root[data-theme="light"],
+:root.light {
 	/* FONTS */
 	--font-family:
 		"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -8,88 +10,88 @@
 
 	/* COLORS */
 	/* Text */
-	--color-text-50: hsl(0, 0%, 95%);
-	--color-text-100: hsl(0, 0%, 90%);
-	--color-text-200: hsl(0, 0%, 80%);
-	--color-text-300: hsl(0, 0%, 70%);
-	--color-text-400: hsl(0, 0%, 60%);
-	--color-text-500: hsl(0, 0%, 50%);
-	--color-text-600: hsl(0, 0%, 40%);
-	--color-text-700: hsl(0, 0%, 30%);
-	--color-text-800: hsl(0, 0%, 20%);
-	--color-text-900: hsl(0, 0%, 10%);
-	--color-text-950: hsl(0, 0%, 5%);
+	--color-text-50: hsl(70, 35%, 95%);
+	--color-text-100: hsl(70, 35%, 90%);
+	--color-text-200: hsl(70, 35%, 80%);
+	--color-text-300: hsl(70, 35%, 70%);
+	--color-text-400: hsl(70, 35%, 60%);
+	--color-text-500: hsl(70, 35%, 50%);
+	--color-text-600: hsl(70, 35%, 40%);
+	--color-text-700: hsl(70, 35%, 30%);
+	--color-text-800: hsl(70, 35%, 20%);
+	--color-text-900: hsl(70, 35%, 10%);
+	--color-text-950: hsl(70, 35%, 5%);
 	--color-text: var(--color-text-950);
 
 	/* Background */
-	--color-background-50: hsl(0, 0%, 95%);
-	--color-background-100: hsl(0, 0%, 90%);
-	--color-background-200: hsl(0, 0%, 80%);
-	--color-background-300: hsl(0, 0%, 70%);
-	--color-background-400: hsl(0, 0%, 60%);
-	--color-background-500: hsl(0, 0%, 50%);
-	--color-background-600: hsl(0, 0%, 40%);
-	--color-background-700: hsl(0, 0%, 30%);
-	--color-background-800: hsl(0, 0%, 20%);
-	--color-background-900: hsl(0, 0%, 10%);
-	--color-background-950: hsl(0, 0%, 5%);
+	--color-background-50: hsl(70, 35%, 95%);
+	--color-background-100: hsl(70, 35%, 90%);
+	--color-background-200: hsl(70, 35%, 80%);
+	--color-background-300: hsl(70, 35%, 70%);
+	--color-background-400: hsl(70, 35%, 60%);
+	--color-background-500: hsl(70, 35%, 50%);
+	--color-background-600: hsl(70, 35%, 40%);
+	--color-background-700: hsl(70, 35%, 30%);
+	--color-background-800: hsl(70, 35%, 20%);
+	--color-background-900: hsl(70, 35%, 10%);
+	--color-background-950: hsl(70, 35%, 5%);
 	--color-background: var(--color-background-50);
 
 	/* Primary */
-	--color-primary-50: hsl(196, 60%, 95%);
-	--color-primary-100: hsl(194, 57%, 90%);
-	--color-primary-200: hsl(194, 59%, 80%);
-	--color-primary-300: hsl(194, 58%, 70%);
-	--color-primary-400: hsl(194, 58%, 60%);
-	--color-primary-500: hsl(194, 58%, 50%);
-	--color-primary-600: hsl(194, 58%, 40%);
-	--color-primary-700: hsl(194, 58%, 30%);
-	--color-primary-800: hsl(194, 58%, 24%);
-	--color-primary-900: hsl(194, 57%, 10%);
-	--color-primary-950: hsl(192, 60%, 5%);
-	--color-primary: var(--color-primary-700);
-	--color-primary-surface: var(--color-primary-800);
-	--color-primary-on-light: var(--color-primary-800);
-	--color-primary-foreground: var(--color-text-50);
+	--color-primary-50: hsl(70, 35%, 95%);
+	--color-primary-100: hsl(70, 35%, 85%);
+	--color-primary-200: hsl(70, 35%, 75%);
+	--color-primary-300: hsl(70, 35%, 65%);
+	--color-primary-400: hsl(70, 35%, 55%);
+	--color-primary-500: hsl(70, 35%, 45%);
+	--color-primary-600: hsl(70, 35%, 35%);
+	--color-primary-700: hsl(70, 35%, 25%);
+	--color-primary-800: hsl(70, 35%, 15%);
+	--color-primary-900: hsl(70, 35%, 10%);
+	--color-primary-950: hsl(70, 35%, 5%);
+	--color-primary: var(--color-primary-400);
+	--color-primary-surface: var(--color-primary-400);
+	--color-primary-on-light: var(--color-primary-400);
+	--color-primary-foreground: var(--color-text-950);
 	--color-primary-tint: var(--color-primary-100);
 
 	/* Secondary */
-	--color-secondary-50: hsl(60, 12%, 95%);
-	--color-secondary-100: hsl(60, 14%, 90%);
-	--color-secondary-200: hsl(64, 14%, 80%);
-	--color-secondary-300: hsl(60, 12%, 70%);
-	--color-secondary-400: hsl(62, 13%, 60%);
-	--color-secondary-500: hsl(62, 13%, 50%);
-	--color-secondary-600: hsl(62, 13%, 40%);
-	--color-secondary-700: hsl(60, 12%, 30%);
-	--color-secondary-800: hsl(60, 12%, 26%);
-	--color-secondary-900: hsl(60, 14%, 10%);
-	--color-secondary-950: hsl(60, 12%, 5%);
-	--color-secondary: var(--color-secondary-700);
-	--color-secondary-surface: var(--color-secondary-800);
-	--color-secondary-on-light: var(--color-secondary-800);
-	--color-secondary-foreground: var(--color-text-50);
+	--color-secondary-50: hsl(140, 35%, 95%);
+	--color-secondary-100: hsl(140, 35%, 85%);
+	--color-secondary-200: hsl(140, 35%, 75%);
+	--color-secondary-300: hsl(140, 35%, 65%);
+	--color-secondary-400: hsl(140, 35%, 55%);
+	--color-secondary-500: hsl(140, 35%, 45%);
+	--color-secondary-600: hsl(140, 35%, 35%);
+	--color-secondary-700: hsl(140, 35%, 25%);
+	--color-secondary-800: hsl(140, 35%, 15%);
+	--color-secondary-900: hsl(140, 35%, 10%);
+	--color-secondary-950: hsl(140, 35%, 5%);
+	--color-secondary: var(--color-secondary-400);
+	--color-secondary-surface: var(--color-secondary-400);
+	--color-secondary-on-light: var(--color-secondary-400);
+	--color-secondary-foreground: var(--color-text-900);
 	--color-secondary-tint: var(--color-secondary-100);
 
-	/* Tertiary */
-	--color-tertiary-50: hsl(337, 92%, 95%);
-	--color-tertiary-100: hsl(335, 88%, 85%);
-	--color-tertiary-200: hsl(335, 88%, 72%);
-	--color-tertiary-300: hsl(335, 90%, 62%);
-	--color-tertiary-400: hsl(335, 89%, 52%);
-	--color-tertiary-500: hsl(335, 89%, 42%);
-	--color-tertiary-600: hsl(335, 89%, 32%);
-	--color-tertiary-700: hsl(335, 90%, 22%);
-	--color-tertiary-800: hsl(335, 88%, 15%);
-	--color-tertiary-900: hsl(335, 88%, 10%);
-	--color-tertiary-950: hsl(334, 92%, 5%);
+	/* Tertiary (Mapped from RTC Accent) */
+	--color-tertiary-50: hsl(165, 31%, 95%);
+	--color-tertiary-100: hsl(164, 29%, 90%);
+	--color-tertiary-200: hsl(161, 31%, 80%);
+	--color-tertiary-300: hsl(162, 31%, 70%);
+	--color-tertiary-400: hsl(162, 31%, 60%);
+	--color-tertiary-500: hsl(162, 31%, 50%);
+	--color-tertiary-600: hsl(162, 31%, 40%);
+	--color-tertiary-700: hsl(162, 31%, 30%);
+	--color-tertiary-800: hsl(161, 31%, 20%);
+	--color-tertiary-900: hsl(164, 29%, 10%);
+	--color-tertiary-950: hsl(158, 31%, 5%);
 	--color-tertiary: var(--color-tertiary-700);
 	--color-tertiary-surface: var(--color-tertiary-700);
 	--color-tertiary-on-light: var(--color-tertiary-700);
 	--color-tertiary-foreground: var(--color-text-50);
 	--color-tertiary-tint: var(--color-tertiary-100);
 
-	/* Default */
+	/* Default (Preserved) */
 	--color-default-50: hsl(240, 5%, 95%);
 	--color-default-100: hsl(240, 5%, 90%);
 	--color-default-200: hsl(240, 5%, 80%);
@@ -107,7 +109,7 @@
 	--color-default-foreground: var(--color-text-50);
 	--color-default-tint: var(--color-default-100);
 
-	/* Success */
+	/* Success (Preserved) */
 	--color-success-50: hsl(150, 55%, 95%);
 	--color-success-100: hsl(150, 55%, 90%);
 	--color-success-200: hsl(150, 55%, 80%);
@@ -125,7 +127,7 @@
 	--color-success-foreground: var(--color-text-50);
 	--color-success-tint: var(--color-success-100);
 
-	/* Info */
+	/* Info (Preserved) */
 	--color-info-50: hsl(210, 55%, 95%);
 	--color-info-100: hsl(210, 55%, 90%);
 	--color-info-200: hsl(210, 55%, 80%);
@@ -143,7 +145,7 @@
 	--color-info-foreground: var(--color-text-50);
 	--color-info-tint: var(--color-info-100);
 
-	/* Warning */
+	/* Warning (Preserved) */
 	--color-warning-50: hsl(40, 92%, 95%);
 	--color-warning-100: hsl(40, 92%, 90%);
 	--color-warning-200: hsl(40, 92%, 80%);
@@ -161,7 +163,7 @@
 	--color-warning-foreground: var(--color-text-50);
 	--color-warning-tint: var(--color-warning-100);
 
-	/* Danger */
+	/* Danger (Preserved) */
 	--color-danger-50: hsl(0, 82%, 95%);
 	--color-danger-100: hsl(0, 82%, 90%);
 	--color-danger-200: hsl(0, 82%, 80%);
@@ -178,6 +180,205 @@
 	--color-danger-on-light: var(--color-danger-700);
 	--color-danger-foreground: var(--color-text-50);
 	--color-danger-tint: var(--color-danger-100);
+
+	/* SIZING */
+	--radus-none: 0rem;
+	--radius-xs: 0.125rem;
+	--radius-sm: 0.25rem;
+	--radius-md: 0.375rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
+	--radius-2xl: 1rem;
+	--radius-3xl: 1.5rem;
+	--radius-4xl: 2rem;
+	--spacing-md: 0.75rem;
+
+	/* TRANSITION */
+	--transition-duration: 225ms;
+	--transition-style: ease-in-out;
+}
+
+:root[data-theme="dark"],
+:root.dark {
+	/* FONTS */
+	--font-family:
+		"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		sans-serif;
+
+	--font-weight: 500;
+
+	/* COLORS */
+	/* Text (Reversed from RTC Dark Mode Export to keep 50=Light) */
+	--color-text-50: hsl(69, 28%, 95%);
+	--color-text-100: hsl(72, 29%, 90%);
+	--color-text-200: hsl(69, 27%, 80%);
+	--color-text-300: hsl(70, 28%, 70%);
+	--color-text-400: hsl(69, 28%, 60%);
+	--color-text-500: hsl(69, 28%, 50%);
+	--color-text-600: hsl(69, 28%, 40%);
+	--color-text-700: hsl(70, 28%, 30%);
+	--color-text-800: hsl(69, 27%, 20%);
+	--color-text-900: hsl(72, 29%, 10%);
+	--color-text-950: hsl(69, 28%, 5%);
+	--color-text: var(--color-text-50);
+
+	/* Background (Reversed from RTC Dark Mode Export to keep 50=Light) */
+	--color-background-50: hsl(67, 31%, 95%);
+	--color-background-100: hsl(71, 33%, 90%);
+	--color-background-200: hsl(72, 33%, 80%);
+	--color-background-300: hsl(72, 33%, 70%);
+	--color-background-400: hsl(72, 33%, 60%);
+	--color-background-500: hsl(72, 33%, 50%);
+	--color-background-600: hsl(72, 33%, 40%);
+	--color-background-700: hsl(72, 33%, 30%);
+	--color-background-800: hsl(72, 33%, 20%);
+	--color-background-900: hsl(71, 33%, 10%);
+	--color-background-950: hsl(75, 31%, 5%);
+	--color-background: var(--color-background-900);
+
+	/* Primary (Reversed from RTC Dark Mode Export to keep 50=Light) */
+	--color-primary-50: hsl(67, 31%, 95%);
+	--color-primary-100: hsl(71, 33%, 90%);
+	--color-primary-200: hsl(69, 31%, 80%);
+	--color-primary-300: hsl(70, 32%, 70%);
+	--color-primary-400: hsl(70, 32%, 60%);
+	--color-primary-500: hsl(70, 32%, 50%);
+	--color-primary-600: hsl(70, 32%, 40%);
+	--color-primary-700: hsl(70, 32%, 30%);
+	--color-primary-800: hsl(69, 31%, 20%);
+	--color-primary-900: hsl(71, 33%, 10%);
+	--color-primary-950: hsl(75, 31%, 5%);
+	--color-primary: var(--color-primary-400);
+	--color-primary-surface: var(--color-primary-500);
+	--color-primary-on-light: var(--color-primary-200);
+	--color-primary-foreground: var(--color-text-50);
+	--color-primary-tint: var(--color-primary-300);
+
+	/* Secondary (Reversed from RTC Dark Mode Export to keep 50=Light) */
+	--color-secondary-50: hsl(142, 31%, 95%);
+	--color-secondary-100: hsl(140, 29%, 90%);
+	--color-secondary-200: hsl(141, 31%, 80%);
+	--color-secondary-300: hsl(140, 31%, 70%);
+	--color-secondary-400: hsl(142, 31%, 60%);
+	--color-secondary-500: hsl(141, 31%, 50%);
+	--color-secondary-600: hsl(142, 31%, 40%);
+	--color-secondary-700: hsl(140, 31%, 30%);
+	--color-secondary-800: hsl(141, 31%, 20%);
+	--color-secondary-900: hsl(140, 29%, 10%);
+	--color-secondary-950: hsl(143, 31%, 5%);
+	--color-secondary: var(--color-secondary-400);
+	--color-secondary-surface: var(--color-secondary-500);
+	--color-secondary-on-light: var(--color-secondary-200);
+	--color-secondary-foreground: var(--color-text-50);
+	--color-secondary-tint: var(--color-secondary-300);
+
+	/* Tertiary (Reversed from RTC Accent Dark Mode Export to keep 50=Light) */
+	--color-tertiary-50: hsl(165, 31%, 95%);
+	--color-tertiary-100: hsl(164, 29%, 90%);
+	--color-tertiary-200: hsl(161, 31%, 80%);
+	--color-tertiary-300: hsl(162, 31%, 70%);
+	--color-tertiary-400: hsl(162, 31%, 60%);
+	--color-tertiary-500: hsl(162, 31%, 50%);
+	--color-tertiary-600: hsl(162, 31%, 40%);
+	--color-tertiary-700: hsl(162, 31%, 30%);
+	--color-tertiary-800: hsl(161, 31%, 20%);
+	--color-tertiary-900: hsl(164, 29%, 10%);
+	--color-tertiary-950: hsl(158, 31%, 5%);
+	--color-tertiary: var(--color-tertiary-400);
+	--color-tertiary-surface: var(--color-tertiary-500);
+	--color-tertiary-on-light: var(--color-tertiary-200);
+	--color-tertiary-foreground: var(--color-text-50);
+	--color-tertiary-tint: var(--color-tertiary-300);
+
+	/* Default (Preserved) */
+	--color-default-50: hsl(240, 8%, 82%);
+	--color-default-100: hsl(240, 8%, 75%);
+	--color-default-200: hsl(240, 8%, 66%);
+	--color-default-300: hsl(240, 8%, 58%);
+	--color-default-400: hsl(240, 8%, 51%);
+	--color-default-500: hsl(240, 8%, 46%);
+	--color-default-600: hsl(240, 8%, 40%);
+	--color-default-700: hsl(240, 8%, 35%);
+	--color-default-800: hsl(240, 8%, 30%);
+	--color-default-900: hsl(240, 8%, 24%);
+	--color-default-950: hsl(240, 8%, 18%);
+	--color-default: var(--color-default-400);
+	--color-default-surface: var(--color-default-600);
+	--color-default-on-light: var(--color-default-200);
+	--color-default-foreground: var(--color-text-50);
+	--color-default-tint: var(--color-default-300);
+
+	/* Success (Preserved) */
+	--color-success-50: hsl(150, 60%, 82%);
+	--color-success-100: hsl(150, 60%, 75%);
+	--color-success-200: hsl(150, 60%, 66%);
+	--color-success-300: hsl(150, 60%, 58%);
+	--color-success-400: hsl(150, 60%, 51%);
+	--color-success-500: hsl(150, 60%, 46%);
+	--color-success-600: hsl(150, 60%, 40%);
+	--color-success-700: hsl(150, 60%, 35%);
+	--color-success-800: hsl(150, 60%, 30%);
+	--color-success-900: hsl(150, 60%, 24%);
+	--color-success-950: hsl(150, 60%, 18%);
+	--color-success: var(--color-success-400);
+	--color-success-surface: var(--color-success-500);
+	--color-success-on-light: var(--color-success-200);
+	--color-success-foreground: var(--color-text-50);
+	--color-success-tint: var(--color-success-300);
+
+	/* Info (Preserved) */
+	--color-info-50: hsl(210, 64%, 82%);
+	--color-info-100: hsl(210, 64%, 75%);
+	--color-info-200: hsl(210, 64%, 66%);
+	--color-info-300: hsl(210, 64%, 58%);
+	--color-info-400: hsl(210, 64%, 51%);
+	--color-info-500: hsl(210, 64%, 46%);
+	--color-info-600: hsl(210, 64%, 40%);
+	--color-info-700: hsl(210, 64%, 35%);
+	--color-info-800: hsl(210, 64%, 30%);
+	--color-info-900: hsl(210, 64%, 24%);
+	--color-info-950: hsl(210, 64%, 18%);
+	--color-info: var(--color-info-400);
+	--color-info-surface: var(--color-info-500);
+	--color-info-on-light: var(--color-info-200);
+	--color-info-foreground: var(--color-text-50);
+	--color-info-tint: var(--color-info-300);
+
+	/* Warning (Preserved) */
+	--color-warning-50: hsl(40, 86%, 82%);
+	--color-warning-100: hsl(40, 86%, 75%);
+	--color-warning-200: hsl(40, 86%, 66%);
+	--color-warning-300: hsl(40, 86%, 58%);
+	--color-warning-400: hsl(40, 86%, 51%);
+	--color-warning-500: hsl(40, 86%, 46%);
+	--color-warning-600: hsl(40, 86%, 40%);
+	--color-warning-700: hsl(40, 86%, 35%);
+	--color-warning-800: hsl(40, 86%, 30%);
+	--color-warning-900: hsl(40, 86%, 24%);
+	--color-warning-950: hsl(40, 86%, 18%);
+	--color-warning: var(--color-warning-400);
+	--color-warning-surface: var(--color-warning-500);
+	--color-warning-on-light: var(--color-warning-200);
+	--color-warning-foreground: var(--color-text-50);
+	--color-warning-tint: var(--color-warning-300);
+
+	/* Danger (Preserved) */
+	--color-danger-50: hsl(0, 76%, 82%);
+	--color-danger-100: hsl(0, 76%, 75%);
+	--color-danger-200: hsl(0, 76%, 66%);
+	--color-danger-300: hsl(0, 76%, 58%);
+	--color-danger-400: hsl(0, 76%, 51%);
+	--color-danger-500: hsl(0, 76%, 46%);
+	--color-danger-600: hsl(0, 76%, 40%);
+	--color-danger-700: hsl(0, 76%, 35%);
+	--color-danger-800: hsl(0, 76%, 30%);
+	--color-danger-900: hsl(0, 76%, 24%);
+	--color-danger-950: hsl(0, 76%, 18%);
+	--color-danger: var(--color-danger-400);
+	--color-danger-surface: var(--color-danger-500);
+	--color-danger-on-light: var(--color-danger-200);
+	--color-danger-foreground: var(--color-text-50);
+	--color-danger-tint: var(--color-danger-300);
 
 	/* SIZING */
 	--radus-none: 0rem;
