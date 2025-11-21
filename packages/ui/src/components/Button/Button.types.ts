@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonColor =
 	| "primary"
@@ -30,6 +30,8 @@ export type ButtonRadius =
 	| "full";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	startContent?: ReactNode | string;
+	endContent?: ReactNode | string;
 	color?: ButtonColor;
 	variant?: ButtonVariant;
 	size?: ButtonSize;

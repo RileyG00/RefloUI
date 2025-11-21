@@ -14,10 +14,22 @@
 	transition-timing-function: var(--transition-style);
 }
 
+.rfui-button__content {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.rfui-button__start,
+.rfui-button__end,
+.rfui-button__label {
+	display: inline-flex;
+	align-items: center;
+}
+
 @keyframes rfui-ripple {
 	to {
 		transform: scale(1);
 		opacity: 0;
 	}
 }
-

@@ -169,6 +169,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	(
 		{
 			className,
+			startContent,
+			endContent,
 			color = "primary",
 			variant = "solid",
 			size = "md",
@@ -242,6 +244,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			addRipple(event);
 		};
 
+		const hasStartContent =
+			startContent !== undefined && startContent !== null;
+		const hasEndContent = endContent !== undefined && endContent !== null;
+		const hasChildren = children !== undefined && children !== null;
+
 		return (
 			<button
 				ref={ref}
@@ -267,11 +274,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						aria-hidden="true"
 					/>
 				))}
-				{children}
+				<span className="rfui-button__content">
+					{hasStartContent ? (
+						<span className="rfui-button__start">{startContent}</span>
+					) : null}
+					{hasChildren ? (
+						<span className="rfui-button__label">{children}</span>
+					) : null}
+					{hasEndContent ? (
+						<span className="rfui-button__end">{endContent}</span>
+					) : null}
+				</span>
 			</button>
 		);
 	},
 );
 
 Button.displayName = "Button";
-
