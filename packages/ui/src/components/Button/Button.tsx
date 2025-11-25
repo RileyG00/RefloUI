@@ -1,6 +1,6 @@
 /* eslint-env browser */
 import {
-	forwardRef,
+	FC,
 	useEffect,
 	useRef,
 	useState,
@@ -207,131 +207,120 @@ const buttonStyles = tv({
 	},
 });
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	(
-		{
-			className,
-			startContent,
-			endContent,
-			color = "primary",
-			variant = "solid",
-			size = "md",
-			radius = "lg",
-			fullWidth = false,
-			isLoading = false,
-			isDisabled = false,
-			isDisableRipple = false,
-			children,
-			onClick,
-			...rest
+export const Button: FC<ButtonProps> = ({
+	ref,
+	className,
+	startContent,
+	endContent,
+	color = "primary",
+	variant = "solid",
+	size = "md",
+	radius = "lg",
+	fullWidth = false,
+	isLoading = false,
+	isDisabled = false,
+	isDisableRipple = false,
+	children,
+	onClick,
+	...rest
+}) => {
+	const [ripples, setRipples] = useState<Ripple[]>([]);
+	const nextRippleId = useRef(0);
+	const rippleTimers = useRef<
+		Array<ReturnType<typeof globalThis.setTimeout>>
+	>([]);
+
+	useEffect(
+		() => () => {
+			rippleTimers.current.forEach((timerId) =>
+				globalThis.clearTimeout(timerId),
+			);
+			rippleTimers.current = [];
 		},
-		ref,
-	) => {
-		const [ripples, setRipples] = useState<Ripple[]>([]);
-		const nextRippleId = useRef(0);
-		const rippleTimers = useRef<
-			Array<ReturnType<typeof globalThis.setTimeout>>
-		>([]);
+		[],
+	);
 
-		useEffect(
-			() => () => {
-				rippleTimers.current.forEach((timerId) =>
-					globalThis.clearTimeout(timerId),
-				);
-				rippleTimers.current = [];
-			},
-			[],
-		);
+	const addRipple = (event: MouseEvent<HTMLButtonElement>) => {
+		const rect = event.currentTarget.getBoundingClientRect();
+		const hasPointer = event.clientX !== 0 || event.clientY !== 0;
+		const x = hasPointer ? event.clientX - rect.left : rect.width / 2;
+		const y = hasPointer ? event.clientY - rect.top : rect.height / 2;
+		const farthestX = Math.max(x, rect.width - x);
+		const farthestY = Math.max(y, rect.height - y);
+		const radius = Math.sqrt(farthestX ** 2 + farthestY ** 2);
+		const diameter = radius * 2;
+		const id = nextRippleId.current++;
 
-		const addRipple = (event: MouseEvent<HTMLButtonElement>) => {
-			const rect = event.currentTarget.getBoundingClientRect();
-			const hasPointer = event.clientX !== 0 || event.clientY !== 0;
-			const x = hasPointer ? event.clientX - rect.left : rect.width / 2;
-			const y = hasPointer ? event.clientY - rect.top : rect.height / 2;
-			const farthestX = Math.max(x, rect.width - x);
-			const farthestY = Math.max(y, rect.height - y);
-			const radius = Math.sqrt(farthestX ** 2 + farthestY ** 2);
-			const diameter = radius * 2;
-			const id = nextRippleId.current++;
-
-			const style: CSSProperties = {
-				width: diameter,
-				height: diameter,
-				left: x - radius,
-				top: y - radius,
-			};
-
-			setRipples((prev) => [...prev, { id, style }]);
-			const timeoutId = globalThis.setTimeout(() => {
-				setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
-				rippleTimers.current = rippleTimers.current.filter(
-					(timerId) => timerId !== timeoutId,
-				);
-			}, RIPPLE_DURATION);
-
-			rippleTimers.current.push(timeoutId);
+		const style: CSSProperties = {
+			width: diameter,
+			height: diameter,
+			left: x - radius,
+			top: y - radius,
 		};
 
-		const handleClick: ButtonProps["onClick"] = (event) => {
-			onClick?.(event);
-			if (
-				event.defaultPrevented ||
-				isDisabled ||
-				isLoading ||
-				isDisableRipple
-			) {
-				return;
-			}
+		setRipples((prev) => [...prev, { id, style }]);
+		const timeoutId = globalThis.setTimeout(() => {
+			setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
+			rippleTimers.current = rippleTimers.current.filter(
+				(timerId) => timerId !== timeoutId,
+			);
+		}, RIPPLE_DURATION);
 
-			addRipple(event);
-		};
+		rippleTimers.current.push(timeoutId);
+	};
 
-		const hasStartContent =
-			startContent !== undefined && startContent !== null;
-		const hasEndContent = endContent !== undefined && endContent !== null;
-		const hasChildren = children !== undefined && children !== null;
+	const handleClick: ButtonProps["onClick"] = (event) => {
+		onClick?.(event);
+		if (event.defaultPrevented || isDisabled || isLoading) {
+			return;
+		}
 
-		return (
-			<button
-				ref={ref}
-				data-loading={isLoading}
-				data-disabled={isDisabled}
-				className={buttonStyles({
-					color,
-					variant,
-					size,
-					radius,
-					fullWidth,
-					class: className,
-				})}
-				disabled={isDisabled || isLoading}
-				onClick={handleClick}
-				{...rest}
-			>
-				{ripples.map((ripple) => (
-					<span
-						key={ripple.id}
-						className="rfui-ripple"
-						style={ripple.style}
-						aria-hidden="true"
-					/>
-				))}
-				<span className="rfui-button__content">
-					{hasStartContent ? (
-						<span className="rfui-button__start">
-							{startContent}
-						</span>
-					) : null}
-					{hasChildren ? (
-						<span className="rfui-button__label">{children}</span>
-					) : null}
-					{hasEndContent ? (
-						<span className="rfui-button__end">{endContent}</span>
-					) : null}
-				</span>
-			</button>
-		);
-	},
-);
+		!isDisableRipple && addRipple(event);
+	};
+
+	const hasStartContent = startContent !== undefined && startContent !== null;
+	const hasEndContent = endContent !== undefined && endContent !== null;
+	const hasChildren = children !== undefined && children !== null;
+	const isBtnDisabled = isDisabled || isLoading;
+
+	return (
+		<button
+			ref={ref}
+			data-loading={isLoading}
+			data-disabled={isDisabled}
+			className={buttonStyles({
+				color,
+				variant,
+				size,
+				radius,
+				fullWidth,
+				class: className,
+			})}
+			disabled={isBtnDisabled}
+			onClick={handleClick}
+			{...rest}
+		>
+			{ripples.map((ripple) => (
+				<span
+					key={ripple.id}
+					className="rfui-ripple"
+					style={ripple.style}
+					aria-hidden="true"
+				/>
+			))}
+			<span className="rfui-button__content">
+				{hasStartContent ? (
+					<span className="rfui-button__start">{startContent}</span>
+				) : null}
+				{hasChildren ? (
+					<span className="rfui-button__label">{children}</span>
+				) : null}
+				{hasEndContent ? (
+					<span className="rfui-button__end">{endContent}</span>
+				) : null}
+			</span>
+		</button>
+	);
+};
 
 Button.displayName = "Button";
