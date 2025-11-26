@@ -22,6 +22,7 @@ export type ButtonVariant =
 	| "outlineFill"
 	| "outlineRemove"
 	| "outlineRemain"
+	| "dashed"
 	| "ghost"
 	| "ghostOutline"
 	| "flat"

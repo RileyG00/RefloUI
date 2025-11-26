@@ -128,6 +128,11 @@ const buttonStyles = tv({
 				"text-[var(--btn-bg)]",
 				"enabled:hover:text-[color-mix(in_srgb,var(--btn-bg)_60%,transparent)]",
 			].join(" "),
+			dashed: [
+				"text-[var(--btn-bg)]",
+				"border-dashed",
+				"enabled:hover:text-[color-mix(in_srgb,var(--btn-bg)_60%,transparent)]",
+			].join(" "),
 			ghost: [
 				"border-transparent",
 				"text-[var(--btn-bg)]",
