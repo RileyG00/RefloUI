@@ -1,215 +1,32 @@
 /* eslint-env browser */
 import {
-	FC,
 	useEffect,
 	useRef,
 	useState,
 	type CSSProperties,
 	type MouseEvent,
 } from "react";
-import { tv } from "tailwind-variants";
-import {
-	ButtonProps,
-	ButtonVariant,
-	ButtonSize,
-	ButtonColor,
-} from "./Button.types";
+import { useButton, useHover } from "react-aria";
+import { ButtonProps, Ripple } from "./Button.types";
+import buttonStyles from "./Button.styles";
+import { RIPPLE_DURATION } from "./Button.constants";
 import "./Button.css";
 import "../../styles/tokens.css";
 
-type Ripple = {
-	id: number;
-	style: CSSProperties;
+// Helper to safely sync the forwarded ref without triggering strict mutation errors
+const syncRef = (ref: unknown, value: HTMLButtonElement | null) => {
+	if (typeof ref === "function") {
+		ref(value);
+	} else if (ref && typeof ref === "object" && "current" in ref) {
+		// We cast to a structural type to assign current, avoiding the deprecated MutableRefObject
+		(ref as { current: HTMLButtonElement | null }).current = value;
+	}
 };
 
-const RIPPLE_DURATION = 650;
-
-const buttonStyles = tv({
-	base: [
-		"rfui-button",
-		"inline-flex items-center justify-center",
-		"font-medium font-[var(--font-family)]",
-		"border",
-		"transition-[background-color,color,border-color]",
-		"duration-[var(--transition-duration)]",
-		"ease-[var(--transition-style)]",
-		"min-w-fit",
-		"focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1",
-		"disabled:opacity-60 disabled:cursor-not-allowed",
-		"hover:cursor-pointer",
-		"relative overflow-hidden",
-		"enabled:active:scale-97",
-	].join(" "),
-	variants: {
-		color: {
-			primary: [
-				"[--btn-bg:hsl(var(--color-primary))]",
-				"[--btn-bg-hover:hsl(var(--color-primary)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-primary)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-primary-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-primary-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-primary))]",
-			].join(" "),
-			secondary: [
-				"[--btn-bg:hsl(var(--color-secondary))]",
-				"[--btn-bg-hover:hsl(var(--color-secondary)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-secondary)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-secondary-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-secondary-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-secondary))]",
-			].join(" "),
-			tertiary: [
-				"[--btn-bg:hsl(var(--color-tertiary))]",
-				"[--btn-bg-hover:hsl(var(--color-tertiary)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-tertiary)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-tertiary-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-tertiary-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-tertiary))]",
-			].join(" "),
-			default: [
-				"[--btn-bg:hsl(var(--color-default))]",
-				"[--btn-bg-hover:hsl(var(--color-default)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-default)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-default-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-default-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-default))]",
-			].join(" "),
-			success: [
-				"[--btn-bg:hsl(var(--color-success))]",
-				"[--btn-bg-hover:hsl(var(--color-success)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-success)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-success-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-success-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-success))]",
-			].join(" "),
-			info: [
-				"[--btn-bg:hsl(var(--color-info))]",
-				"[--btn-bg-hover:hsl(var(--color-info)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-info)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-info-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-info-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-info))]",
-			].join(" "),
-			warning: [
-				"[--btn-bg:hsl(var(--color-warning))]",
-				"[--btn-bg-hover:hsl(var(--color-warning)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-warning)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var(--color-warning-700))]",
-				"[--btn-txt:hsl(var(--color-warning-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-warning-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-warning))]",
-			].join(" "),
-			danger: [
-				"[--btn-bg:hsl(var(--color-danger))]",
-				"[--btn-bg-hover:hsl(var(--color-danger)/0.75)]",
-				"[--btn-bg-flat:hsl(var(--color-danger)/0.18)]",
-				"[--btn-bg-flat-txt:hsl(var((--btn-bg))]",
-				"[--btn-txt:hsl(var(--color-danger-foreground))]",
-				"[--btn-txt-inverted:hsl(var(--color-danger-foreground-inverted))]",
-				"focus-visible:outline-[hsl(var(--color-danger))]",
-			].join(" "),
-		} satisfies Record<ButtonColor, string>,
-		variant: {
-			solid: [
-				"border-transparent",
-				"bg-[var(--btn-bg)]",
-				"text-[var(--btn-txt)]",
-				"enabled:hover:bg-[var(--btn-bg-hover)]",
-			].join(" "),
-			outline: [
-				"bg-transparent",
-				"text-[var(--btn-bg)]",
-				"border-[var(--btn-bg)]",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_20%,transparent)]",
-			].join(" "),
-			outlineFill: [
-				"bg-transparent",
-				"text-[var(--btn-bg)]",
-				"border-[var(--btn-bg)]",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_100%,transparent)]",
-				"enabled:hover:text-[var(--btn-txt)]",
-			].join(" "),
-			outlineRemove: [
-				"bg-transparent",
-				"text-[var(--btn-bg)]",
-				"enabled:hover:border-transparent",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_20%,transparent)]",
-			].join(" "),
-			outlineRemain: [
-				"text-[var(--btn-bg)]",
-				"enabled:hover:text-[color-mix(in_srgb,var(--btn-bg)_60%,transparent)]",
-			].join(" "),
-			ghost: [
-				"border-transparent",
-				"text-[var(--btn-bg)]",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_20%,transparent)]",
-			].join(" "),
-			ghostOutline: [
-				"border-transparent",
-				"text-[var(--btn-bg)]",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg)_20%,transparent)]",
-				"enabled:hover:border-[var(--btn-bg)]",
-			].join(" "),
-			flat: [
-				"border-transparent",
-				"text-[var(--btn-bg-flat-txt)]",
-				"bg-[var(--btn-bg-flat)]",
-				"enabled:hover:bg-[color-mix(in_srgb,var(--btn-bg-flat)_65%,transparent)]",
-			].join(" "),
-			none: [
-				"border-transparent",
-
-				"text-[var(--btn-bg)]",
-				"enabled:hover:text-[color-mix(in_srgb,var(--btn-bg)_60%,transparent)]",
-			].join(" "),
-			shadow: [
-				"border-transparent",
-				"bg-[var(--btn-bg)]",
-				"text-[var(--btn-txt)]",
-				"enabled:hover:bg-[var(--btn-bg-hover)]",
-				"shadow-lg",
-				"shadow-xl/20",
-				"filter-[drop-shadow(1px_3px_4px_color-mix(in_srgb,var(--btn-bg)_70%,transparent))]",
-			].join(" "),
-		} satisfies Record<ButtonVariant, string>,
-		size: {
-			sm: "text-sm py-[0.3rem] px-[0.75rem]",
-			md: "text-base py-[0.4rem] px-[1rem]",
-			lg: "text-lg py-[0.5rem] px-[1.25rem]",
-		} satisfies Record<ButtonSize, string>,
-		fullWidth: {
-			true: "w-full",
-		},
-		radius: {
-			none: "rounded-[var(--radius-none)]",
-			xs: "rounded-[var(--radius-xs)]",
-			sm: "rounded-[var(--radius-sm)]",
-			md: "rounded-[var(--radius-md)]",
-			lg: "rounded-[var(--radius-lg)]",
-			xl: "rounded-[var(--radius-xl)]",
-			"2xl": "rounded-[var(--radius-2xl)]",
-			"3xl": "rounded-[var(--radius-3xl)]",
-			"4xl": "rounded-[var(--radius-4xl)]",
-			full: "rounded-full",
-		},
-	},
-	defaultVariants: {
-		color: "primary",
-		variant: "solid",
-		size: "md",
-		radius: "lg",
-	},
-});
-
-export const Button: FC<ButtonProps> = ({
-	ref,
-	className,
+// No 'FC' or 'forwardRef' needed in React 19 for this pattern
+export const Button = ({
+	ref, // 1. Ref is now available directly in props
+	children, // 2. Destructure children so 'hasChildren' works
 	startContent,
 	endContent,
 	color = "primary",
@@ -220,16 +37,42 @@ export const Button: FC<ButtonProps> = ({
 	isLoading = false,
 	isDisabled = false,
 	isDisableRipple = false,
-	children,
-	onClick,
-	...rest
-}) => {
+	classNames,
+	...props
+}: ButtonProps) => {
+	//-------------------------------------------------------------
+	// Ref Handling (Critical for React Aria)
+	//-------------------------------------------------------------
+	// useButton requires a RefObject (object with .current).
+	// The parent 'ref' prop might be a function, null, or object.
+	// We use a local RefObject for the hook, and sync it to the DOM.
+	const objRef = useRef<HTMLButtonElement>(null);
+
+	// React Aria's useButton consumes 'props.onPress' (from ...props) automatically.
+	// It returns 'isPressed' which is better than CSS :active for styling.
+	const { buttonProps, isPressed } = useButton(props, objRef);
+
+	//-------------------------------------------------------------
+	// Hover Functionality
+	//-------------------------------------------------------------
+	let { hoverProps } = useHover({
+		onHoverStart: () => props?.onHoverStart && props.onHoverStart(),
+		onHoverEnd: () => props?.onHoverEnd && props.onHoverEnd(),
+		onHoverChange: () => props?.onHoverChange && props.onHoverChange(),
+	});
+
+	//-------------------------------------------------------------
+	// Variables
+	//-------------------------------------------------------------
 	const [ripples, setRipples] = useState<Ripple[]>([]);
 	const nextRippleId = useRef(0);
 	const rippleTimers = useRef<
 		Array<ReturnType<typeof globalThis.setTimeout>>
 	>([]);
 
+	//-------------------------------------------------------------
+	// Effects
+	//-------------------------------------------------------------
 	useEffect(
 		() => () => {
 			rippleTimers.current.forEach((timerId) =>
@@ -240,6 +83,9 @@ export const Button: FC<ButtonProps> = ({
 		[],
 	);
 
+	//-------------------------------------------------------------
+	// Methods
+	//-------------------------------------------------------------
 	const addRipple = (event: MouseEvent<HTMLButtonElement>) => {
 		const rect = event.currentTarget.getBoundingClientRect();
 		const hasPointer = event.clientX !== 0 || event.clientY !== 0;
@@ -269,36 +115,50 @@ export const Button: FC<ButtonProps> = ({
 		rippleTimers.current.push(timeoutId);
 	};
 
-	const handleClick: ButtonProps["onClick"] = (event) => {
-		onClick?.(event);
-		if (event.defaultPrevented || isDisabled || isLoading) {
-			return;
-		}
-
-		!isDisableRipple && addRipple(event);
-	};
-
 	const hasStartContent = startContent !== undefined && startContent !== null;
 	const hasEndContent = endContent !== undefined && endContent !== null;
-	const hasChildren = children !== undefined && children !== null;
-	const isBtnDisabled = isDisabled || isLoading;
 
+	const hasChildren = children !== undefined && children !== null;
+
+	//-------------------------------------------------------------
+	// Styling
+	//-------------------------------------------------------------
+	const { base, content, start, label, end } = buttonStyles({
+		color,
+		variant,
+		size,
+		radius,
+		fullWidth,
+	});
+
+	//-------------------------------------------------------------
+	// Return
+	//-------------------------------------------------------------
 	return (
 		<button
-			ref={ref}
-			data-loading={isLoading}
-			data-disabled={isDisabled}
-			className={buttonStyles({
-				color,
-				variant,
-				size,
-				radius,
-				fullWidth,
-				class: className,
+			{...buttonProps}
+			{...hoverProps}
+			ref={(node) => {
+				// 3. React 19 Ref Merging Pattern
+				// Update our local ref for useButton
+				objRef.current = node;
+
+				// Update the parent's ref safely using the helper
+				syncRef(ref, node);
+			}}
+			// Expose the pressed state to CSS for advanced styling
+			data-pressed={isPressed || undefined}
+			className={base({
+				class: classNames?.base || (props.className ?? ""),
 			})}
-			disabled={isBtnDisabled}
-			onClick={handleClick}
-			{...rest}
+			disabled={isLoading || isDisabled}
+			onClick={(e) => {
+				if (!isDisableRipple && !isLoading && !isDisabled) {
+					addRipple(e);
+				}
+
+				buttonProps.onClick?.(e);
+			}}
 		>
 			{ripples.map((ripple) => (
 				<span
@@ -308,16 +168,12 @@ export const Button: FC<ButtonProps> = ({
 					aria-hidden="true"
 				/>
 			))}
-			<span className="rfui-button__content">
-				{hasStartContent ? (
-					<span className="rfui-button__start">{startContent}</span>
-				) : null}
-				{hasChildren ? (
-					<span className="rfui-button__label">{children}</span>
-				) : null}
-				{hasEndContent ? (
-					<span className="rfui-button__end">{endContent}</span>
-				) : null}
+			<span className={content()}>
+				{hasStartContent && (
+					<span className={start()}>{startContent}</span>
+				)}
+				{hasChildren && <span className={label()}>{children}</span>}
+				{hasEndContent && <span className={end()}>{endContent}</span>}
 			</span>
 		</button>
 	);

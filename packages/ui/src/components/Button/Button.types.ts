@@ -1,4 +1,11 @@
-import { ButtonHTMLAttributes, ReactNode, Ref } from "react";
+import { CSSProperties, ReactNode, Ref } from "react";
+import { AriaButtonProps } from "react-aria";
+import buttonStyles from "./Button.styles";
+
+export type Ripple = {
+	id: number;
+	style: CSSProperties;
+};
 
 export type ButtonColor =
 	| "primary"
@@ -33,7 +40,13 @@ export type ButtonRadius =
 	| "4xl"
 	| "full";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type AriaButtonPropsCleansed = Omit<AriaButtonProps, "onClick">;
+type ButtonStyleSlots = Partial<(typeof buttonStyles)["slots"]>;
+
+export interface ButtonProps extends AriaButtonPropsCleansed {
+	children?: ReactNode;
+	className?: string;
+	classNames?: ButtonStyleSlots;
 	ref?: Ref<HTMLButtonElement>;
 	startContent?: ReactNode | string;
 	endContent?: ReactNode | string;
@@ -45,4 +58,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	isLoading?: boolean;
 	isDisabled?: boolean;
 	isDisableRipple?: boolean;
+	onHoverStart?: () => any;
+	onHoverEnd?: () => any;
+	onHoverChange?: () => any;
 }
